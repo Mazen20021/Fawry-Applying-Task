@@ -5,8 +5,6 @@ import com.example.fawry_task.Model.DTO.user_dto;
 import com.example.fawry_task.Service.admin_service_interface;
 import com.example.fawry_task.Service.user_service_interface;
 import lombok.RequiredArgsConstructor;
-
-
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
