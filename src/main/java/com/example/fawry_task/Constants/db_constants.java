@@ -16,7 +16,10 @@ public class db_constants {
     private String emailParam = "email";
     private String passwordParam = "password";
     private int id = 202420250;
-
+    private String movieMainCollection = "collection";
+    private String movieDocument = "movies";
+    private String movieSubCollection = "data";
+    private String movieRatesParam = "average_rates";
     public db_constants() {
 
     }

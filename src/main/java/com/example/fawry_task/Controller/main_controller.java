@@ -1,8 +1,10 @@
 package com.example.fawry_task.Controller;
 
 import com.example.fawry_task.Model.DTO.admin_dto;
+import com.example.fawry_task.Model.DTO.movies_dto;
 import com.example.fawry_task.Model.DTO.user_dto;
 import com.example.fawry_task.Service.admin_service_interface;
+import com.example.fawry_task.Service.movie_service_interface;
 import com.example.fawry_task.Service.user_service_interface;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import java.util.concurrent.ExecutionException;
 public class main_controller {
     private final admin_service_interface adminService;
     private final user_service_interface userService;
+    private final movie_service_interface movieService;
     @RequestMapping("/auth")
     public String authorise(@ModelAttribute("admin") admin_dto adminDTO , @ModelAttribute("user") user_dto userDTO, Model model) throws ExecutionException, InterruptedException {
         if (adminService.is_admin_found(adminDTO.getEmail() , adminDTO.getPassword()))
@@ -55,5 +58,10 @@ public class main_controller {
     public boolean signUp(@ModelAttribute("user") user_dto userDTO , Model model) {
         model.addAttribute("message", "200");
        return userService.add_new_user(userDTO.getEmail() , userDTO.getPassword() , userDTO.getPassword());
+    }
+    @RequestMapping("/home/search")
+    public movies_dto search(@ModelAttribute("movie") movies_dto moviesDto , Model model) throws ExecutionException, InterruptedException {
+        model.addAttribute("message", "200");
+        return movieService.searchByName(moviesDto.getName());
     }
 }
