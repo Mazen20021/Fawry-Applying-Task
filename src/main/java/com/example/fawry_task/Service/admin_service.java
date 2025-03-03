@@ -11,8 +11,7 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class admin_service implements admin_service_interface {
-
-    db_constants dbConstants;
+    db_constants dbConstants = new db_constants();
     @Override
     public boolean is_admin_found(String email, String password) throws ExecutionException, InterruptedException {
 

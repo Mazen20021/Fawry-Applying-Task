@@ -31,7 +31,7 @@ public class main_controller {
             return  "User Found";
         }
         model.addAttribute("message", "101");
-        return "user Not Found";
+        return "User Not Found";
     }
     @RequestMapping("/get/admin/data")
     public admin_dto getAdminData(@ModelAttribute("admin") admin_dto adminDTO , Model model) throws ExecutionException, InterruptedException {
@@ -50,5 +50,10 @@ public class main_controller {
             return userService.get_user_data(userDTO.getEmail());
         }
         return  null;
+    }
+    @RequestMapping("/signup")
+    public boolean signUp(@ModelAttribute("user") user_dto userDTO , Model model) {
+        model.addAttribute("message", "200");
+       return userService.add_new_user(userDTO.getEmail() , userDTO.getPassword() , userDTO.getPassword());
     }
 }

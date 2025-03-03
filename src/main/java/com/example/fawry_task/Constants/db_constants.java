@@ -15,4 +15,9 @@ public class db_constants {
     private String nameParam = "name";
     private String emailParam = "email";
     private String passwordParam = "password";
+    private int id = 202420250;
+
+    public db_constants() {
+
+    }
 }
