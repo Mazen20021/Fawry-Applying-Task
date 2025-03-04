@@ -8,6 +8,13 @@ This application was developed as part of a **technical assessment for Fawry Com
 
 ---
 
+## 🕒 Project TimeLine
+This project was developed within diffrent phases:
+- **Phase 1 (Backend) duration : 2/3/2025 to 5/3/2025**
+- **Phase 2 (Frontend) duration : 5/3/2025 to 8/3/2025**
+- **Phase 3 (Testing) duration : 8/3/2025 to 9/3/2025**
+  
+---
 ## 🛠 Technology Stack
 
 ### 🔹 Frontend – Flutter
