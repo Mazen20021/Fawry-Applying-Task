@@ -1,4 +1,4 @@
-# 🚀 Movie App –Fawry Test
+# 🚀 Movie App – Fawry Test
 
 ## 📌 Project Overview
 
