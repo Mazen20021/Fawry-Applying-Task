@@ -1,12 +1,12 @@
-🚀 Movie App – Flutter & Spring Boot
+# 🚀 Movie App – Flutter & Spring Boot
 
-📌 Project Overview
+## 📌 Project Overview
 
 This project is a movie search and management application built using Flutter for the frontend and Spring Boot for the backend. It integrates with Firebase to store and retrieve movie data, ensuring seamless access across devices.
 
 This application is developed as part of a technical test for Fawry Company.
 
-🛠 Technology Stack
+## 🛠 Technology Stack
 
 🔹 Frontend – Flutter
 
@@ -30,11 +30,11 @@ Used as a cloud-based NoSQL database.
 
 Stores movie search results to reduce API calls and improve performance.
 
-⚙ Features
+## ⚙ Features
 
 ✅ Search movies by title and fetch details.✅ Store and retrieve movie data from Firebase.✅ Handle pagination for movie listings.✅ Secure backend with Spring Boot.✅ Responsive UI for mobile platforms (Android & iOS).
 
-🚀 Setup & Installation
+# 🚀 Setup & Installation
 
 1️⃣ Backend (Spring Boot) Setup
 
@@ -75,11 +75,11 @@ Data Storage: Cached and stored in Firebase Firestore.
 
 Backend Communication: REST API calls between Flutter and Spring Boot.
 
-📌 Future Enhancements
+# 📌 Future Enhancements
 
 ✅ Implement user authentication with Firebase.✅ Add movie bookmarking feature.✅ Improve UI with animations.✅ Introduce caching for faster performance.
 
-🏆 About the Project
+# 🏆 About the Project
 
 This project was developed as a technical assessment for Fawry Company to demonstrate expertise in:
 
@@ -89,7 +89,7 @@ Spring Boot (Backend Development)
 
 Firebase (Cloud Database Integration)
 
-👨‍💻 Author
+# 👨‍💻 Author
 
-[Your Name]📧 Email: [Your Email]🔗 LinkedIn: [Your Profile]
+Mazen Ahmed Abdelkhalik Mohamed 📧 Email: mazen20190441@gmail.com 🔗 LinkedIn: [Mazen Mansour](https://www.linkedin.com/in/mazen-mansour-b4726123a/)
 
