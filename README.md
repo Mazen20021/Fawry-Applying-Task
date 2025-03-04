@@ -10,11 +10,10 @@ This application was developed as part of a **technical assessment for Fawry Com
 
 ## 🛠 Technology Stack
 
-### 🔹 Frontend – Flutter
+### 🔹 Frontend – Flutter **(Selected for its rapid development capabilities within the project’s time constraints as i couldn't have enough time to study React)**
 - Built with **Flutter** for a modern, fast, and cross-platform user experience.
 - Utilizes **Cubit (Bloc Pattern)** for efficient state management.
 - Supports dynamic API calls to fetch and display movie data interactively.
-- Selected for its rapid development capabilities within the project’s time constraints.
 
 ### 🔹 Backend – Spring Boot
 - Developed using **Spring Boot (Java 23)** for a scalable and high-performance backend.
