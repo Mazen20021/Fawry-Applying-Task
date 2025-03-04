@@ -7,10 +7,9 @@ import com.example.fawry_task.Service.admin_service_interface;
 import com.example.fawry_task.Service.movie_service_interface;
 import com.example.fawry_task.Service.user_service_interface;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.connector.Response;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -22,7 +21,7 @@ public class main_controller {
     private final admin_service_interface adminService;
     private final user_service_interface userService;
     private final movie_service_interface movieService;
-    @RequestMapping("/auth")
+    @GetMapping("/auth")
     public String authorise(@ModelAttribute("admin") admin_dto adminDTO , @ModelAttribute("user") user_dto userDTO, Model model) throws ExecutionException, InterruptedException {
         if (adminService.is_admin_found(adminDTO.getEmail() , adminDTO.getPassword()))
         {
@@ -37,7 +36,7 @@ public class main_controller {
         model.addAttribute("message", "101");
         return "User Not Found";
     }
-    @RequestMapping("/get/admin/data")
+    @GetMapping("/get/admin/data")
     public admin_dto getAdminData(@ModelAttribute("admin") admin_dto adminDTO , Model model) throws ExecutionException, InterruptedException {
         if(adminService.get_admin_data(adminDTO.getEmail())!= null)
         {
@@ -46,7 +45,7 @@ public class main_controller {
         }
             return  null;
     }
-    @RequestMapping("/get/user/data")
+    @GetMapping("/get/user/data")
     public user_dto getUserData(@ModelAttribute("user") user_dto userDTO , Model model) throws ExecutionException, InterruptedException {
         if(userService.get_user_data(userDTO.getEmail())!= null)
         {
@@ -55,19 +54,29 @@ public class main_controller {
         }
         return  null;
     }
-    @RequestMapping("/signup")
+    @GetMapping("/signup")
     public boolean signUp(@ModelAttribute("user") user_dto userDTO , Model model) {
         model.addAttribute("message", "200");
        return userService.add_new_user(userDTO.getEmail() , userDTO.getPassword() , userDTO.getPassword());
     }
-    @RequestMapping("/home/search")
-    public List<movies_dto> search(@ModelAttribute("movie") movies_dto moviesDto , String movieName, Model model){
+    @GetMapping("/home/search")
+    public List<movies_dto> search(@ModelAttribute("movie") movies_dto moviesDto , String movieName, Model model) throws ExecutionException, InterruptedException {
         model.addAttribute("message", "200");
         return movieService.searchMovies(movieName);
     }
-    @RequestMapping("/home/movies")
+    @GetMapping("/home/movies")
     public List<movies_dto> viewAllMovies(@ModelAttribute("movie") movies_dto moviesDto , String query, Model model) throws ExecutionException, InterruptedException {
         model.addAttribute("message", "200");
         return movieService.getAllMovies(query);
+    }
+    @DeleteMapping("/admin/remove")
+    public boolean removeMovie(@ModelAttribute("movie") movies_dto moviesDto , String name, Model model) throws ExecutionException, InterruptedException {
+        model.addAttribute("message", "200");
+        return movieService.removeMovie(name);
+    }
+    @PutMapping("/admin/add")
+    public boolean addMovie(@ModelAttribute("movie") movies_dto moviesDto , String title , String type ,String movieName, String poster,String year,String imdbID, Model model)throws ExecutionException, InterruptedException {
+        model.addAttribute("message", "200");
+        return movieService.addMovie(title,movieName,type,poster,year,imdbID);
     }
 }

@@ -8,7 +8,6 @@ import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,13 +19,30 @@ public class movie_service implements movie_service_interface{
     private final RestTemplate restTemplate;
     db_constants dbConstants = new db_constants();
     omdb_constants omdbConstants = new omdb_constants();
-    movies_dto movie = new movies_dto();
     public movie_service(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
-
     @Override
-    public List<movies_dto> searchMovies (String movieName) {
+    public List<movies_dto> searchMovies (String movieName) throws ExecutionException, InterruptedException {
+        List<movies_dto> allMovies = new ArrayList<>();
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentSnapshot moviesDoc = db.collection(dbConstants.getMovieMainCollection()).document(movieName).get().get();
+        if (moviesDoc.exists()) {
+            Map<String, Object> moviesMap = moviesDoc.getData();
+            if (moviesMap != null) {
+                for (Map.Entry<String, Object> entry : moviesMap.entrySet()) {
+                    movies_dto movie = new movies_dto();
+                    Map<String, Object> movieData = (Map<String, Object>) entry.getValue();
+                    movie.setTitle((String) movieData.get("Title"));
+                    movie.setYear((String) movieData.get("Year"));
+                    movie.setType((String) movieData.get("Type"));
+                    movie.setImdbID((String) movieData.get("imdbID"));
+                    movie.setPoster((String) movieData.get("Poster"));
+                    allMovies.add(movie);
+                }
+            }
+            return allMovies;
+        }
         String url = omdbConstants.getUrl() + "?apikey=" + omdbConstants.getApiKey() + "&s=" + movieName;
         Map<String, Object> response = restTemplate.getForObject(url, Map.class);
         if (response != null && response.containsKey("Search")) {
@@ -44,64 +60,102 @@ public class movie_service implements movie_service_interface{
             Map<String, Object> moviesMap = moviesDoc.getData();
             if (moviesMap != null) {
                 for (Map.Entry<String, Object> entry : moviesMap.entrySet()) {
+                    movies_dto movie = new movies_dto();
                     Map<String, Object> movieData = (Map<String, Object>) entry.getValue();
-                    movies_dto movie = new movies_dto(); // You missed initializing the object here
                     movie.setTitle((String) movieData.get("title"));
-                    movie.setRates((String) movieData.get("rates"));
                     movie.setYear((String) movieData.get("year"));
                     movie.setType((String) movieData.get("type"));
                     movie.setImdbID((String) movieData.get("imdbID"));
                     movie.setPoster((String) movieData.get("poster"));
-
                     allMovies.add(movie);
                 }
             }
             return allMovies;
         }
-
-
-        while (hasMore) {
-            String url = String.format("%s/?s=%s&page=%d&apikey=%s", omdbConstants.getUrl(), query, page, omdbConstants.getApiKey());
-            Map<String, Object> response = restTemplate.getForObject(url, Map.class);
-
-            if (response != null && response.containsKey("Search")) {
-                List<Map<String, Object>> moviesList = (List<Map<String, Object>>) response.get("Search");
-
-                for (Map<String, Object> movieData : moviesList) {
+            while (hasMore) {
+                String url = String.format("%s/?s=%s&page=%d&apikey=%s", omdbConstants.getUrl(), query, page, omdbConstants.getApiKey());
+                Map<String, Object> response = restTemplate.getForObject(url, Map.class);
+                if (response != null && response.containsKey("Search")) {
+                    List<Map<String, Object>> moviesList = (List<Map<String, Object>>) response.get("Search");
+                    for (Map<String, Object> movieData : moviesList) {
+                        movies_dto movie = new movies_dto();
+                        movie.setTitle((String) movieData.get("Title"));
+                        movie.setYear((String) movieData.get("Year"));
+                        movie.setType((String) movieData.get("Type"));
+                        movie.setImdbID((String) movieData.get("imdbID"));
+                        movie.setPoster((String) movieData.get("Poster"));
+                        allMovies.add(movie);
+                    }
+                } else if (response != null && response.containsKey("Title")) {
                     movies_dto movie = new movies_dto();
-                    movie.setTitle((String) movieData.get("title"));  // Ensure correct key
-                    movie.setRates((String) movieData.get("imdbID")); // Check correct key
-                    movie.setYear((String) movieData.get("year"));
-                    movie.setType((String) movieData.get("type"));
-                    movie.setImdbID((String) movieData.get("imdbID"));
-                    movie.setPoster((String) movieData.get("poster"));
-
+                    movie.setTitle((String) response.get("Title"));
+                    movie.setYear((String) response.get("Year"));
+                    movie.setType((String) response.get("Type"));
+                    movie.setImdbID((String) response.get("imdbID"));
+                    movie.setPoster((String) response.get("Poster"));
                     allMovies.add(movie);
                 }
+                if (response == null || !response.containsKey("Search") || ((List<?>) response.get("Search")).size() < 10) {
+                    hasMore = false;
+                } else {
+                    page++;
+                }
             }
-
-            if (response == null || !response.containsKey("Search") || ((List<?>) response.get("Search")).size() < 10) {
-                hasMore = false;
-            } else {
-                page++;
-            }
-        }
-
         if (!allMovies.isEmpty()) {
             Map<String, Object> moviesMap = new HashMap<>();
             for (movies_dto movie : allMovies) {
-                if (movie.getTitle() != null) {  // Only add if title is not null
+                if (movie.getTitle() != null) {
                     moviesMap.put(movie.getTitle(), Map.of(
-                            "title", movie.getTitle(),
-                            "rates", movie.getRates(),
-                            "poster", movie.getPoster(),
-                            "year", movie.getYear(),
-                            "type", movie.getType()
+                            "Title", movie.getTitle(),
+                            "Poster", movie.getPoster(),
+                            "Year", movie.getYear(),
+                            "Type", movie.getType()
                     ));
                 }
             }
             db.collection(dbConstants.getMovieMainCollection()).document(query).set(moviesMap);
         }
         return allMovies;
+    }
+    @Override
+    public boolean removeMovie(String name) throws ExecutionException, InterruptedException {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentSnapshot moviesDoc = db.collection(dbConstants.getMovieMainCollection()).document(name).get().get();
+        if (moviesDoc.exists()) {
+            db.collection(dbConstants.getMovieMainCollection()).document(name).delete().get();
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public boolean addMovie(String title , String movieName , String type ,String poster, String year , String imdbID ) throws ExecutionException, InterruptedException {
+        Firestore db = FirestoreClient.getFirestore();
+        DocumentSnapshot moviesDoc = db.collection(dbConstants.getMovieMainCollection()).document(title).get().get();
+        if (!moviesDoc.exists()) {
+            Map<String, Object> moviesMap = new HashMap<>();
+            moviesMap.put(movieName, Map.of(
+                    "Title", movieName,
+                    "Poster", poster,
+                    "Year", year,
+                    "Type", type,
+                    "imdbID", imdbID
+            ));
+            db.collection(dbConstants.getMovieMainCollection()).document(title).set(moviesMap);
+            return true;
+        } else {
+            Map<String, Object> newField = moviesDoc.getData();
+            if (newField == null) {
+                newField = new HashMap<>();
+            }
+            newField.put(movieName, Map.of(
+                    "Title", movieName,
+                    "Poster", poster,
+                    "Year", year,
+                    "Type", type,
+                    "imdbID", imdbID
+            ));
+            db.collection(dbConstants.getMovieMainCollection()).document(title).update(newField).get();
+            return true;
+        }
     }
 }

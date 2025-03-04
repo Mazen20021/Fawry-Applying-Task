@@ -14,6 +14,5 @@ public class movies_dto {
     private String type;
     private String poster;
 
-    private String rates;
     public movies_dto(){}
 }
