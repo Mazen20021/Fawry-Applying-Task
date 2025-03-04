@@ -10,7 +10,8 @@ This application was developed as part of a **technical assessment for Fawry Com
 
 ## 🛠 Technology Stack
 
-### 🔹 Frontend – Flutter **(Selected for its rapid development capabilities within the project’s time constraints as i couldn't have enough time to study React)**
+### 🔹 Frontend – Flutter
+- **(Selected for its rapid development capabilities within the project’s time constraints as i couldn't have enough time to study React)**
 - Built with **Flutter** for a modern, fast, and cross-platform user experience.
 - Utilizes **Cubit (Bloc Pattern)** for efficient state management.
 - Supports dynamic API calls to fetch and display movie data interactively.
