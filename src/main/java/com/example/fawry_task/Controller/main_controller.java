@@ -7,10 +7,8 @@ import com.example.fawry_task.Service.admin_service_interface;
 import com.example.fawry_task.Service.movie_service_interface;
 import com.example.fawry_task.Service.user_service_interface;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.connector.Response;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
