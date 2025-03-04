@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RequiredArgsConstructor
@@ -60,8 +61,13 @@ public class main_controller {
        return userService.add_new_user(userDTO.getEmail() , userDTO.getPassword() , userDTO.getPassword());
     }
     @RequestMapping("/home/search")
-    public movies_dto search(@ModelAttribute("movie") movies_dto moviesDto , Model model) throws ExecutionException, InterruptedException {
+    public List<movies_dto> search(@ModelAttribute("movie") movies_dto moviesDto , String movieName, Model model){
         model.addAttribute("message", "200");
-        return movieService.searchByName(moviesDto.getName());
+        return movieService.searchMovies(movieName);
+    }
+    @RequestMapping("/home/movies")
+    public List<movies_dto> viewAllMovies(@ModelAttribute("movie") movies_dto moviesDto , String query, Model model) throws ExecutionException, InterruptedException {
+        model.addAttribute("message", "200");
+        return movieService.getAllMovies(query);
     }
 }

@@ -8,7 +8,12 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 public class movies_dto {
-    private String name;
+    private String title;
+    private String year;
+    private String imdbID;
+    private String type;
+    private String poster;
+
     private String rates;
     public movies_dto(){}
 }
