@@ -14,6 +14,7 @@ This application was developed as part of a **technical assessment for Fawry Com
 - Built with **Flutter** for a modern, fast, and cross-platform user experience.
 - Utilizes **Cubit (Bloc Pattern)** for efficient state management.
 - Supports dynamic API calls to fetch and display movie data interactively.
+- Selected for its rapid development capabilities within the project’s time constraints.
 
 ### 🔹 Backend – Spring Boot
 - Developed using **Spring Boot (Java 23)** for a scalable and high-performance backend.
@@ -23,6 +24,7 @@ This application was developed as part of a **technical assessment for Fawry Com
 ### 🔹 Database – Firebase
 - Utilized as a cloud-based **NoSQL database**.
 - Stores movie search results to reduce API calls and enhance performance.
+- Chosen to enable public access and real-time data synchronization
 
 ---
 
@@ -45,7 +47,6 @@ This project was developed in **three key phases**:
 ✅ Store and retrieve movie data from **Firebase**.
 ✅ Handle pagination for large movie listings.
 ✅ Secure and scalable backend powered by **Spring Boot**.
-✅ Responsive UI for **Android & iOS** platforms.
 
 ---
 
