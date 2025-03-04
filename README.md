@@ -8,13 +8,6 @@ This application was developed as part of a **technical assessment for Fawry Com
 
 ---
 
-## 🕒 Project TimeLine
-This project was developed within diffrent phases:
-- **Phase 1 (Backend) duration : 2/3/2025 to 5/3/2025**
-- **Phase 2 (Frontend) duration : 5/3/2025 to 8/3/2025**
-- **Phase 3 (Testing) duration : 8/3/2025 to 9/3/2025**
-  
----
 ## 🛠 Technology Stack
 
 ### 🔹 Frontend – Flutter
@@ -30,6 +23,20 @@ This project was developed within diffrent phases:
 ### 🔹 Database – Firebase
 - Utilized as a cloud-based **NoSQL database**.
 - Stores movie search results to reduce API calls and enhance performance.
+
+---
+
+## 🕒 Project Timeline
+This project was developed in **three key phases**:
+
+- **Phase 1: Backend Development** (March 2, 2025 – March 5, 2025)  
+  Implemented the **Spring Boot** backend, integrated the **OMDb API**, and connected to **Firebase** for data storage.
+
+- **Phase 2: Frontend Development** (March 5, 2025 – March 8, 2025)  
+  Built the **Flutter UI**, integrated **Cubit for state management**, and established communication with the backend.
+
+- **Phase 3: Testing & Optimization** (March 8, 2025 – March 9, 2025)  
+  Conducted rigorous testing, fixed bugs, and optimized performance for a seamless user experience.
 
 ---
 
