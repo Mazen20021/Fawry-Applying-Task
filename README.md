@@ -1,4 +1,4 @@
-# 🚀 Movie App – Flutter & Spring Boot
+# 🚀 Movie App –Fawry Test
 
 ## 📌 Project Overview
 
@@ -55,7 +55,7 @@ This project was developed in **three key phases**:
 #### 🔹 Requirements:
 - **Java 23**
 - **Spring Boot 3+**
-- **Firebase Admin SDK**
+- **Firebase Admin SDK** (Chosen to enable public access and real-time data synchronization)
 
 #### 🔹 Running the Backend
 ```bash
