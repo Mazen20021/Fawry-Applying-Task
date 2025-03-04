@@ -2,95 +2,95 @@
 
 ## 📌 Project Overview
 
-    This project is a movie search and management application built using Flutter for the frontend and Spring Boot for the backend. It integrates with Firebase to store and retrieve movie data, ensuring seamless access across devices.
+This project is a **movie search and management application** built using **Flutter** for the frontend and **Spring Boot** for the backend. It integrates with **Firebase** to store and retrieve movie data, ensuring seamless access across devices.
 
-    This application is developed as part of a technical test for Fawry Company.
+This application was developed as part of a **technical assessment for Fawry Company**.
+
+---
 
 ## 🛠 Technology Stack
 
-🔹 Frontend – Flutter
+### 🔹 Frontend – Flutter
+- Built with **Flutter** for a modern, fast, and cross-platform user experience.
+- Utilizes **Cubit (Bloc Pattern)** for efficient state management.
+- Supports dynamic API calls to fetch and display movie data interactively.
 
-      Developed with Flutter for a modern, fast, and cross-platform UI.
+### 🔹 Backend – Spring Boot
+- Developed using **Spring Boot (Java 23)** for a scalable and high-performance backend.
+- Fetches movie data from the **OMDb API**.
+- Integrates with **Firebase** for efficient data storage and retrieval.
 
-      Uses Cubit (Bloc Pattern) for efficient state management.
+### 🔹 Database – Firebase
+- Utilized as a cloud-based **NoSQL database**.
+- Stores movie search results to reduce API calls and enhance performance.
 
-      Supports dynamic API calls and displays movie data interactively.
-
-🔹 Backend – Spring Boot
-
-      Powered by Spring Boot (Java 23) for scalable and high-performance backend services.
-
-      Fetches movie data from an external API (OMDb API).
-
-      Integrates with Firebase for storing search results.
-
-🔹 Database – Firebase
-
-      Used as a cloud-based NoSQL database.
-
-      Stores movie search results to reduce API calls and improve performance.
+---
 
 ## ⚙ Features
+✅ Search movies by title and retrieve detailed information.
+✅ Store and retrieve movie data from **Firebase**.
+✅ Handle pagination for large movie listings.
+✅ Secure and scalable backend powered by **Spring Boot**.
+✅ Responsive UI for **Android & iOS** platforms.
 
-  ✅ Search movies by title and fetch details.
-  ✅ Store and retrieve movie data from Firebase.
-  ✅ Handle pagination for movie listings.
-  ✅ Secure backend with Spring Boot.
+---
 
-# 🚀 Setup & Installation
+## 🚀 Setup & Installation
 
-  1️⃣ Backend (Spring Boot) Setup
+### 1️⃣ Backend (Spring Boot) Setup
+#### 🔹 Requirements:
+- **Java 23**
+- **Spring Boot 3+**
+- **Firebase Admin SDK**
 
-    🔹 Requirements:
+#### 🔹 Running the Backend
+```bash
+cd backend
+mvn spring-boot:run
+```
 
-      Java 23
+---
 
-      Spring Boot 3+
+### 2️⃣ Frontend (Flutter) Setup
+#### 🔹 Requirements:
+- **Flutter SDK**
+- **Dart**
+- **Android/iOS Emulator** or **Physical Device**
 
-      Firebase Admin SDK
+#### 🔹 Running the Flutter App
+```bash
+cd frontend
+flutter pub get
+flutter run
+```
 
-    🔹 Run the Backend
+---
 
-        cd backend
-        mvn spring-boot:run
+## 📡 API Integration
+- **Movie Data:** Retrieved from the **OMDb API**.
+- **Data Storage:** Cached and stored in **Firebase Firestore**.
+- **Backend Communication:** Utilizes **REST API** to connect **Flutter** with **Spring Boot**.
 
-  2️⃣ Frontend (Flutter) Setup
+---
 
-    🔹 Requirements:
+## 📌 Future Enhancements
+✅ Implement **user authentication** with Firebase.
+✅ Add a **movie bookmarking** feature.
+✅ Enhance the UI with animations and modern design.
+✅ Introduce **caching mechanisms** for improved performance.
 
-        Flutter SDK
-        Dart
-        Android/iOS Emulator or Physical Device
+---
 
-    🔹 Run the Flutter App
+## 🏆 About the Project
+This project was developed as part of a **technical assessment for Fawry Company**, showcasing expertise in:
+- **Flutter (Mobile Development)**
+- **Spring Boot (Backend Development)**
+- **Firebase (Cloud Database Integration)**
 
-        cd frontend
-        flutter pub get
-        flutter run
-        
-# 📡 API Integration
+---
 
-  Movie Data: Retrieved using OMDb API.
-  Data Storage: Cached and stored in Firebase Firestore.
-  Backend Communication: REST API calls between Flutter and Spring Boot.
-
-# 📌 Future Enhancements
-
-  ✅ Implement user authentication with Firebase.
-  ✅ Add movie bookmarking feature.
-  ✅ Improve UI with animations.
-  ✅ Introduce caching for faster performance.
-
-# 🏆 About the Project
-
-  This project was developed as a technical assessment for Fawry Company to demonstrate expertise in:
-  Flutter (Mobile Development)
-  Spring Boot (Backend Development)
-  Firebase (Cloud Database Integration)
-
-# 👨‍💻 Author
-
-  Mazen Ahmed Abdelkhalik Mohamed 
-  📧 Email: mazen20190441@gmail.com 
-  🔗 LinkedIn: [Mazen Mansour](https://www.linkedin.com/in/mazen-mansour-b4726123a/)
+## 👨‍💻 Author
+**Mazen Ahmed Abdelkhalik Mohamed**  
+📧 Email: [mazen20190441@gmail.com](mailto:mazen20190441@gmail.com)  
+🔗 LinkedIn: [Mazen Mansour](https://www.linkedin.com/in/mazen-mansour-b4726123a/)
 
