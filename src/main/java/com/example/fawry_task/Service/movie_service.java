@@ -3,7 +3,6 @@ package com.example.fawry_task.Service;
 import com.example.fawry_task.Constants.db_constants;
 import com.example.fawry_task.Constants.omdb_constants;
 import com.example.fawry_task.Model.DTO.movies_dto;
-import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
@@ -21,18 +20,11 @@ public class movie_service implements movie_service_interface{
     private final RestTemplate restTemplate;
     db_constants dbConstants = new db_constants();
     omdb_constants omdbConstants = new omdb_constants();
-    movies_dto moviesDto = new movies_dto();
+    movies_dto movie = new movies_dto();
     public movie_service(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
-//    @Override
-//    public List<movies_dto> getAllMovies(String name) throws ExecutionException, InterruptedException {
-//
-//        // Get the "admins" document from the "auth" collection
-//
-//
-//        return null; // User not found
-//    }
+
     @Override
     public List<movies_dto> searchMovies (String movieName) {
         String url = omdbConstants.getUrl() + "?apikey=" + omdbConstants.getApiKey() + "&s=" + movieName;
@@ -49,23 +41,24 @@ public class movie_service implements movie_service_interface{
         Firestore db = FirestoreClient.getFirestore();
         DocumentSnapshot moviesDoc = db.collection(dbConstants.getMovieMainCollection()).document(dbConstants.getMovieDocument()).collection(dbConstants.getMovieSubCollection()).document(query).get().get();
         if (moviesDoc.exists()) {
-            // 🔹 If movies exist in Firestore, return them
             Map<String, Object> moviesMap = moviesDoc.getData();
             if (moviesMap != null) {
                 for (Map.Entry<String, Object> entry : moviesMap.entrySet()) {
                     Map<String, Object> movieData = (Map<String, Object>) entry.getValue();
-                    movies_dto movie = new movies_dto();
-                    movie.setTitle((String) movieData.get("Title"));
+                    movies_dto movie = new movies_dto(); // You missed initializing the object here
+                    movie.setTitle((String) movieData.get("title"));
                     movie.setRates((String) movieData.get("rates"));
                     movie.setYear((String) movieData.get("year"));
                     movie.setType((String) movieData.get("type"));
                     movie.setImdbID((String) movieData.get("imdbID"));
-                    movie.setPoster((String) movieData.get("Poster"));
+                    movie.setPoster((String) movieData.get("poster"));
+
                     allMovies.add(movie);
                 }
             }
-            return allMovies; // 🔹 No need to call OMDB API
+            return allMovies;
         }
+
 
         while (hasMore) {
             String url = String.format("%s/?s=%s&page=%d&apikey=%s", omdbConstants.getUrl(), query, page, omdbConstants.getApiKey());
@@ -76,9 +69,13 @@ public class movie_service implements movie_service_interface{
 
                 for (Map<String, Object> movieData : moviesList) {
                     movies_dto movie = new movies_dto();
-                    movie.setTitle((String) movieData.get("Title"));
-                    movie.setRates((String) movieData.get("imdbID")); // Example: Using IMDB ID as rates
-                    movie.setPoster((String) movieData.get("Poster"));
+                    movie.setTitle((String) movieData.get("title"));  // Ensure correct key
+                    movie.setRates((String) movieData.get("imdbID")); // Check correct key
+                    movie.setYear((String) movieData.get("year"));
+                    movie.setType((String) movieData.get("type"));
+                    movie.setImdbID((String) movieData.get("imdbID"));
+                    movie.setPoster((String) movieData.get("poster"));
+
                     allMovies.add(movie);
                 }
             }
@@ -90,19 +87,21 @@ public class movie_service implements movie_service_interface{
             }
         }
 
-        // 🔹 Step 3: Save fetched movies to Firestore
         if (!allMovies.isEmpty()) {
             Map<String, Object> moviesMap = new HashMap<>();
             for (movies_dto movie : allMovies) {
-                moviesMap.put(movie.getTitle(), Map.of(
-                        "title", movie.getTitle(),
-                        "rates", movie.getRates(),
-                        "poster", movie.getPoster()
-                ));
+                if (movie.getTitle() != null) {  // Only add if title is not null
+                    moviesMap.put(movie.getTitle(), Map.of(
+                            "title", movie.getTitle(),
+                            "rates", movie.getRates(),
+                            "poster", movie.getPoster(),
+                            "year", movie.getYear(),
+                            "type", movie.getType()
+                    ));
+                }
             }
             db.collection(dbConstants.getMovieMainCollection()).document(query).set(moviesMap);
         }
-
         return allMovies;
     }
 }
