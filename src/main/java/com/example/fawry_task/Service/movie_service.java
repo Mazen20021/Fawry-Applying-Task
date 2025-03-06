@@ -138,7 +138,11 @@ public class movie_service implements movie_service_interface{
                     "Poster", poster,
                     "Year", year,
                     "Type", type,
-                    "imdbID", imdbID
+                    "imdbID", imdbID,
+                    "users" , Map.of(
+                            "name", "N/A",
+                            "rate" , 0
+                    )
             ));
             db.collection(dbConstants.getMovieMainCollection()).document(title).set(moviesMap);
             return true;
@@ -152,7 +156,11 @@ public class movie_service implements movie_service_interface{
                     "Poster", poster,
                     "Year", year,
                     "Type", type,
-                    "imdbID", imdbID
+                    "imdbID", imdbID,
+                    "users" , Map.of(
+                        "name", "N/A",
+                        "rate" , 0
+                    )
             ));
             db.collection(dbConstants.getMovieMainCollection()).document(title).update(newField).get();
             return true;
