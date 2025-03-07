@@ -15,8 +15,7 @@ class Login extends StatelessWidget
     double screenHeight = MediaQuery.of(context).size.height;
     return BlocProvider(create: (BuildContext context) => SiteCubit(), 
     child: BlocConsumer<SiteCubit , SiteStates>(builder: (BuildContext context , states){
-      SiteCubit siteParams = SiteCubit.get(context);
-      Server.connect("mazen2040@gmail.com", "0000");
+    SiteCubit siteParams = SiteCubit.get(context);
     return Form(
       key: siteParams.key,
       child: Scaffold(
@@ -60,7 +59,7 @@ class Login extends StatelessWidget
                       SizedBox(
                         width: 550,
                         child: TextFormField(
-                          obscureText: true,
+                          obscureText: !siteParams.isPasswordHidden ? false: true,
                           style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration:  InputDecoration(
@@ -69,6 +68,15 @@ class Login extends StatelessWidget
                             enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: siteParams.isEmpty&& siteParams.passwordController.text.isEmpty? CustomColors.background : Colors.red)),
                             hoverColor: CustomColors.background,
                             prefixIcon: const Icon(Icons.lock_outline_rounded, color: Colors.white,),
+                            suffixIcon: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: GestureDetector(
+                                onTap: (){
+                                  siteParams.hidePassword(context);
+                                },
+                              child: Icon(siteParams.isPasswordHidden? Icons.visibility_off_rounded : Icons.visibility_rounded, color: Colors.white,),
+
+                              ),),
                             focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: siteParams.isEmpty&& siteParams.passwordController.text.isEmpty ? CustomColors.cards : Colors.red)),
                             labelText: 'Password',
                             labelStyle: TextStyle(color: siteParams.isEmpty && siteParams.passwordController.text.isEmpty  ? Colors.white : Colors.red),
@@ -78,6 +86,10 @@ class Login extends StatelessWidget
                         ),
                       ),
                     const SizedBox(height: 20,),
+                    siteParams.isLoading? CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(CustomColors.background),
+                      backgroundColor: const Color.fromARGB(255, 142, 172, 108),
+                    ) :
                     MouseRegion(
                       onEnter: (event) => {
                         siteParams.enteredOnLoginButton(context)
@@ -87,9 +99,23 @@ class Login extends StatelessWidget
                       },
                       cursor: SystemMouseCursors.click,
                       child: GestureDetector(
-                        onTap: (){
-                          
-                        },
+                        onTap: () async {
+                          if(siteParams.emailController.text.isNotEmpty && siteParams.passwordController.text.isNotEmpty)
+                          {
+                          siteParams.checkUser(context);
+                          String userType = await Server.login(siteParams.emailController.text, siteParams.passwordController.text);
+                          if(userType == "Admin")
+                          {
+                            siteParams.isLoading = false;
+                            Navigator.pushNamed(context, '/home/admin');
+                          }else if(userType == "User")
+                          {
+                            print("here");
+                            Navigator.pushNamed(context, '/home');
+                          }else{
+                            siteParams.checkUser(context);
+                          }
+                        }},
                         child: Container(
                           width: 550,
                           height: 50,
@@ -118,7 +144,7 @@ class Login extends StatelessWidget
                           cursor: SystemMouseCursors.click,
                           child: GestureDetector(
                             onTap: (){
-                              siteParams.checkTextFields(context);
+                              Navigator.pushNamed(context, '/signup');
                             },
                             child: Text('Signup', style: GoogleFonts.dmMono(fontSize: 20,color:siteParams.enteredOnSignup?Colors.white :CustomColors.background , fontWeight: FontWeight.bold),),
                           ),

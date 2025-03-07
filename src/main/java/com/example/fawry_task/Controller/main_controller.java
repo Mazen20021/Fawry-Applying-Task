@@ -20,25 +20,17 @@ public class main_controller {
     private final admin_service_interface adminService;
     private final user_service_interface userService;
     private final movie_service_interface movieService;
-    @GetMapping("/test")
-    public boolean test()
-    {
-        return true;
-    }
     @GetMapping("/auth")
-    public String authorise(@ModelAttribute("admin") admin_dto adminDTO , @ModelAttribute("user") user_dto userDTO, Model model) throws ExecutionException, InterruptedException {
-        if (adminService.is_admin_found(adminDTO.getEmail() , adminDTO.getPassword()))
-        {
+    public int authorise(@RequestParam("email") String email, @RequestParam("password") String password, Model model) throws ExecutionException, InterruptedException {
+        if (adminService.is_admin_found(email, password)) {
             model.addAttribute("message", "200");
-            return  "Admin Found";
-        }
-        else if(userService.is_user_found(userDTO.getEmail() , userDTO.getPassword()))
-        {
+            return 1;
+        } else if (userService.is_user_found(email, password)) {
             model.addAttribute("message", "200");
-            return  "User Found";
+            return 0;
         }
         model.addAttribute("message", "101");
-        return "User Not Found";
+        return -1;
     }
     @GetMapping("/get/admin/data")
     public admin_dto getAdminData(@ModelAttribute("admin") admin_dto adminDTO , Model model) throws ExecutionException, InterruptedException {
@@ -59,9 +51,9 @@ public class main_controller {
         return  null;
     }
     @GetMapping("/signup")
-    public boolean signUp(@ModelAttribute("user") user_dto userDTO , Model model) {
+    public boolean signUp(@RequestParam("email") String email, @RequestParam("password") String password,@RequestParam("name")String name, Model model) {
         model.addAttribute("message", "200");
-       return userService.add_new_user(userDTO.getEmail() , userDTO.getPassword() , userDTO.getPassword());
+       return userService.add_new_user(email , password , name);
     }
     @GetMapping("/home/search")
     public List<movies_dto> search(@ModelAttribute("movie") movies_dto moviesDto , String movieName, Model model) throws ExecutionException, InterruptedException {

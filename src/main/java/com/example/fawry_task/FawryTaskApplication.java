@@ -2,6 +2,9 @@ package com.example.fawry_task;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class FawryTaskApplication {
@@ -9,5 +12,4 @@ public class FawryTaskApplication {
     public static void main(String[] args) {
         SpringApplication.run(FawryTaskApplication.class, args);
     }
-
 }
