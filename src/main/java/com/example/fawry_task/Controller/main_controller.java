@@ -7,6 +7,7 @@ import com.example.fawry_task.Service.admin_service_interface;
 import com.example.fawry_task.Service.movie_service_interface;
 import com.example.fawry_task.Service.user_service_interface;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -20,7 +21,8 @@ public class main_controller {
     private final user_service_interface userService;
     private final movie_service_interface movieService;
     @GetMapping("/test")
-    public boolean testConnection(){
+    public boolean test()
+    {
         return true;
     }
     @GetMapping("/auth")

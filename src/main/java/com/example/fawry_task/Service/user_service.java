@@ -22,14 +22,13 @@ public class user_service implements user_service_interface {
     public boolean is_user_found(String email, String password) throws ExecutionException, InterruptedException {
         Firestore db = FirestoreClient.getFirestore();
         // Query the "auth" collection for the document named "admins"
-        DocumentSnapshot usersDoc = db.collection(dbConstants.getMainCollection()).document(dbConstants.getSubUserDocument()).get().get();
+        DocumentSnapshot usersDoc = db.collection(dbConstants.getMainCollection()).document(dbConstants.getSubUserDocument()).collection(email).document(dbConstants.getSubSubDocument()).get().get();
         if (usersDoc.exists()) {
             // Get the admin users stored as a map
-            var admins = usersDoc.getData();
-
-            if (admins != null && admins.get(dbConstants.getEmailParam()).equals(email)) {
+            var users = usersDoc.getData();
+            if (users != null && users.get(dbConstants.getEmailParam()).equals(email)) {
                 // Get stored password for the given email
-                String storedPassword = (String) admins.get(dbConstants.getPasswordParam());
+                String storedPassword = (String) users.get(dbConstants.getPasswordParam());
                 // Compare passwords
                 return storedPassword.equals(password);
             }

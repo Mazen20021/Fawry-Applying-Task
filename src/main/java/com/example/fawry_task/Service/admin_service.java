@@ -14,10 +14,9 @@ public class admin_service implements admin_service_interface {
     db_constants dbConstants = new db_constants();
     @Override
     public boolean is_admin_found(String email, String password) throws ExecutionException, InterruptedException {
-
         Firestore dbs = FirestoreClient.getFirestore();
         // Query the "auth" collection for the document named "admins"
-        DocumentSnapshot adminsDoc = dbs.collection(dbConstants.getMainCollection()).document(dbConstants.getSubAdminDocument()).get().get();
+        DocumentSnapshot adminsDoc = dbs.collection(dbConstants.getMainCollection()).document(dbConstants.getSubAdminDocument()).collection(email).document(dbConstants.getSubSubDocument()).get().get();
         if (adminsDoc.exists()) {
             // Get the admin users stored as a map
             var admins = adminsDoc.getData();
