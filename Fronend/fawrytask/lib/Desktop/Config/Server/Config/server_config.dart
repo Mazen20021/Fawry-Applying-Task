@@ -1,7 +1,7 @@
 
 
 class ServerConfig {
-  static const String serverUrl = 'http://192.168.1.8:8080';
+  static const String serverUrl = 'localhost:8080';
   static const String loginUrl = '$serverUrl/auth';
   static const String signupUrl = '$serverUrl/signup';
   static const String userHomeUrl = '$serverUrl/home';

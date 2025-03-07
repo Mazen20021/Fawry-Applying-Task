@@ -3,24 +3,21 @@ import 'package:http/http.dart' as http;
 
 class Server {
 
+  static Future<void> connect(String email, String password) async {
+  var url = Uri.parse("http://localhost:8080/auth?email=$email&password=$password");
 
-  static Future<void> connect() async {
-    String responseText = "";
-    try{
-      final response = await http.get(Uri.parse("${ServerConfig.serverUrl}/test"));
+  try {
+    final response = await http.get(url);
+
     if (response.statusCode == 200) {
-
-        responseText = response.body;
-        print(responseText);
+      print("Connected to server");
     } else {
-      
-        responseText = "Error: ${response.statusCode}";
-        print(responseText);
+      print("Didn't Connect to server");
     }
-    }catch(e){
-      print("DueTo: "+responseText + e.toString());
-    }
-    
+  } catch (e) {
+    print("Didn't Connect to server: $e");
   }
+}
+
 
 }

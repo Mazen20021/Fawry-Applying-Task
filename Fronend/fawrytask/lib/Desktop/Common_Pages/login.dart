@@ -16,7 +16,7 @@ class Login extends StatelessWidget
     return BlocProvider(create: (BuildContext context) => SiteCubit(), 
     child: BlocConsumer<SiteCubit , SiteStates>(builder: (BuildContext context , states){
       SiteCubit siteParams = SiteCubit.get(context);
-      Server.connect();
+      Server.connect("mazen2040@gmail.com", "0000");
     return Form(
       key: siteParams.key,
       child: Scaffold(
