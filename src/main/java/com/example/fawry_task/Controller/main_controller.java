@@ -19,6 +19,10 @@ public class main_controller {
     private final admin_service_interface adminService;
     private final user_service_interface userService;
     private final movie_service_interface movieService;
+    @GetMapping("/test")
+    public boolean testConnection(){
+        return true;
+    }
     @GetMapping("/auth")
     public String authorise(@ModelAttribute("admin") admin_dto adminDTO , @ModelAttribute("user") user_dto userDTO, Model model) throws ExecutionException, InterruptedException {
         if (adminService.is_admin_found(adminDTO.getEmail() , adminDTO.getPassword()))

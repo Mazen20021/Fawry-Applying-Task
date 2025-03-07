@@ -13,15 +13,24 @@ class SiteCubit extends Cubit<SiteStates>{
   final TextEditingController passwordController = TextEditingController();
   bool isEmpty = true;
   bool isChecked = false;
+  bool enteredOnLogin = false;
+  bool enteredOnSignup = false;
 
   void checkTextFields(BuildContext context){
     if(!isChecked){
       isChecked = true;
       isEmpty = !isEmpty;
-      print("here" + isEmpty.toString());
-     
       emit(IsEmptyChecker());
       }
   }
-
+  void enteredOnLoginButton(BuildContext context){
+      enteredOnLogin = !enteredOnLogin;
+      emit(IsEnteredOnLogin());
+    
+  }
+ void enteredOnSignupButton(BuildContext context){
+      enteredOnSignup = !enteredOnSignup;
+      emit(IsEnteredOnSignup());
+    
+  }
 }
