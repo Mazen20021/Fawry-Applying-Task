@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:fawrytask/Desktop/Config/Cubit/states.dart';
+import 'package:fawrytask/Desktop/Config/DTOs/movie_dto.dart';
+import 'package:fawrytask/Desktop/Config/Server/server.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,8 +41,25 @@ class SiteCubit extends Cubit<SiteStates>{
   bool enteredMoiveManagment = false;
   bool isLoading2 = false;
   bool isLoading3 = false;
+  bool fetchMovies = false;
   String movieName = "";
 
+List<MovieDTO> movies = []; // Store search results
+
+  Future<void> searchForMovie(String name) async {
+    emit(LoadingMoviesState());
+    try {
+      movies = await Server.searchForMovie(name); 
+      emit(SuccessMoviesState()); 
+    } catch (e) {
+      emit(ErrorMoviesState()); 
+      
+    }
+  }
+  void fetchAllMovie(){
+    fetchMovies = !fetchMovies;
+    emit(FetchAllMovie());
+  }
   void setName(String name){
     movieName = name;
     emit(SetName());

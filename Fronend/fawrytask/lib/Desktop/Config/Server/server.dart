@@ -97,7 +97,20 @@ static Future<List<MovieDTO>> getAllMovies() async {
   if (response.statusCode == 200) {
     List<dynamic> moviesJson = json.decode(response.body);
     
-    // 🔹 Convert JSON to List<MovieDTO>
+    List<MovieDTO> movies = moviesJson.map((movie) => MovieDTO.fromJson(movie)).toList();
+    
+    return movies;
+  } else {
+    throw Exception('Failed to load movies');
+  }
+}
+static Future<List<MovieDTO>> searchForMovie(String name) async {
+  var url = Uri.http(ServerConfig.serverUrl, "/home/search", {"movieName": name});
+  final response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    List<dynamic> moviesJson = json.decode(response.body);
+    
     List<MovieDTO> movies = moviesJson.map((movie) => MovieDTO.fromJson(movie)).toList();
     
     return movies;

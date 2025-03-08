@@ -14,3 +14,8 @@ class EnteredOnMovieManagment extends SiteStates {}
 class RemoveMovies extends SiteStates {}
 class AddMovies extends SiteStates {}
 class SetName extends SiteStates {}
+class LoadingMoviesState extends SiteStates {}
+class SuccessMoviesState extends SiteStates {}
+class ErrorMoviesState extends SiteStates {}
+class FetchAllMovie extends SiteStates {}
+
