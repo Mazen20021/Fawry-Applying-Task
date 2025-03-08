@@ -16,6 +16,35 @@ This project was developed as part of a **technical assessment for Fawry Company
   
 ---
 
+## 🎉 Finished Requirements
+This is the Requirements' Details:
+### 1] Admin Dashboard:
+	- Login functionality for admin users. ✅
+	- Access to a dashboard that loads a movie list from the OMDB API according to search criteria, you can find more details in the API documentation here (https://www.omdbapi.com/).✅
+	- Ability for the admin user to add or remove them (the selected movie/s) from the application database.✅
+
+### 2] Regular User Dashboard:
+	- Login functionality for regular users. ✅
+	- Access to view the full list of movies added by the admin (fetched from the database). ✅
+	- Ability to view details of each movie. ✅
+
+## Addidtional Work :
+
+### #] Nice to Have:
+	- A search bar for regular users to find specific movies. ✅
+	- Rating a specific movie for each user. ❌
+
+### *] Bonus Features:
+	- batch adding or removing movies for admin users. ✅
+	- Apply pagination ❌
+
+### $] Technologies:
+	Angular 16+ ❌ => [Flutter Used] ✅
+	Spring Boot ✅
+	Java 8+ [Java 23 Used] ✅
+	Database of your choice [Firebase Used] ✅
+  
+---
 ## 🛠 Technology Stack
 
 ### 🔹 Frontend – Flutter
@@ -51,10 +80,10 @@ This project was developed in **three key phases**:
 ---
 
 ## ⚙ Features
-✅ Search movies by title and retrieve detailed information.
-✅ Store and retrieve movie data from **Firebase**.
-✅ Handle pagination for large movie listings.
-✅ Secure and scalable backend powered by **Spring Boot**.
+- ✅ Search movies by title and retrieve detailed information.
+- ✅ Store and retrieve movie data from **Firebase**.
+- ✅ Handle pagination for large movie listings.
+- ✅ Secure and scalable backend powered by **Spring Boot**.
 
 ---
 
@@ -66,18 +95,18 @@ This project was developed in **three key phases**:
 ---
 
 ## 📌 Future Enhancements
-✅ Implement **user authentication** with Firebase.
-✅ Add a **movie bookmarking** feature.
-✅ Enhance the UI with animations and modern design.
-✅ Introduce **caching mechanisms** for improved performance.
+- ✅ Implement **user authentication** with Firebase.
+- ✅ Add a **movie bookmarking** feature.
+- ✅ Enhance the UI with animations and modern design.
+- ✅ Introduce **caching mechanisms** for improved performance.
 
 ---
 
 ## 🎯 Test The WebSite
-✅ Run the backend source code using intelji or open cmd and type java -jar project_location_Stored_in_your_pc/build/libs/Fawry_Task-0.0.1-SNAPSHOT.jar (make sure you are using java 23 you can download it from [Java23](https://www.oracle.com/java/technologies/downloads/#jdk23-windows)) 
-✅ after making sure that the backend launched and worked now you are ready to use the website you can try it by going to [FawryTask](https://mazen20021.github.io/FawryTaskRelease/#/login)
-✅ To Access Admin Page "Email = admin1@admin.com" , "Password" = "0000"
-✅ To Access User Page You Only Need to Signup New User and Login With it
+- ✅ Run the backend source code using intelji or open cmd and type java -jar project_location_Stored_in_your_pc/build/libs/Fawry_Task-0.0.1-SNAPSHOT.jar (make sure you are using java 23 you can download it from [Java23](https://www.oracle.com/java/technologies/downloads/#jdk23-windows)) 
+- ✅ after making sure that the backend launched and worked now you are ready to use the website you can try it by going to [FawryTask](https://mazen20021.github.io/FawryTaskRelease/#/login)
+- ✅ To Access Admin Page "Email = admin1@admin.com" , "Password" = "0000"
+- ✅ To Access User Page You Only Need to Signup New User and Login With it
 
 ---
 
