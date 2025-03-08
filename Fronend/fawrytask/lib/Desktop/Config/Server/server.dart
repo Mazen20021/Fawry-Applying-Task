@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:fawrytask/Desktop/Config/DTOs/movie_dto.dart';
 import 'package:fawrytask/Desktop/Config/Server/Config/server_config.dart';
 import 'package:http/http.dart' as http;
 
@@ -43,4 +46,64 @@ class Server {
       return false;
     }
   }
+  static Future<bool> addNewMovie(String movieName, String movieTitle , String movieType , String movieYear , String id , String poster) async {
+      try {
+      var url = Uri.http(ServerConfig.serverUrl, "/admin/add", {"title": movieTitle, "type": movieType , "movieName": movieName , "year": movieYear , "imdbID" : id , "poster" : poster});
+      final response = await http.put(url);
+      if (response.statusCode == 200) {
+       return true;
+      } else {
+        print("Didn't Connect to server: ${response.statusCode}");
+        print("Response body: ${response.body}");
+         return false;
+      }
+    } catch (e) {
+      print("Didn't Connect to server: $e");
+      return false;
+    }
+  }
+  static Future<bool> removeMovie(String movieName , String title) async {
+      try {
+      var url = Uri.http(ServerConfig.serverUrl, "/admin/remove", {"name": movieName , "title" : title });
+      final response = await http.delete(url);
+      if (response.statusCode == 200) {
+       return true;
+      } else {
+        print("Didn't Connect to server: ${response.statusCode}");
+        print("Response body: ${response.body}");
+         return false;
+      }
+    } catch (e) {
+      print("Didn't Connect to server: $e");
+      return false;
+    }
+  }
+  static Future<List<String>> getAllNamesMovies() async {
+    var url = Uri.http(ServerConfig.serverUrl, "/home/movies" );
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      List<dynamic> moviesJson = json.decode(response.body);
+      List<String> movies = moviesJson.map((movie) => movie["title"].toString()).toList();
+      return movies;
+    } else {
+      throw Exception('Failed to load movies');
+    }
+  }
+
+static Future<List<MovieDTO>> getAllMovies() async {
+  var url = Uri.http(ServerConfig.serverUrl, "/home/movies");
+  final response = await http.get(url);
+
+  if (response.statusCode == 200) {
+    List<dynamic> moviesJson = json.decode(response.body);
+    
+    // 🔹 Convert JSON to List<MovieDTO>
+    List<MovieDTO> movies = moviesJson.map((movie) => MovieDTO.fromJson(movie)).toList();
+    
+    return movies;
+  } else {
+    throw Exception('Failed to load movies');
+  }
+}
+
 }

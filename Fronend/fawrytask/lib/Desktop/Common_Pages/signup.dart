@@ -27,22 +27,33 @@ class Signup extends StatelessWidget
               Center(
               child: Container(
                 width: 600,
-                height: 500,
+                height: 600,
                 decoration: BoxDecoration(
                   color: CustomColors.cards.withOpacity(0.8),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(
                   children: [
-
                      Text('Signup', style: GoogleFonts.meaCulpa(fontSize: 100,color: CustomColors.background , fontWeight: FontWeight.bold),),
                     const SizedBox(height: 10,),
                     SizedBox(
                       width: 550,
                       child: TextFormField(
+                         validator: (value) {
+                                if (value?.isEmpty == true) {
+                                  siteParams.isEmpty = true;
+                                  return 'User Name cannot be empty';
+                                }else {
+                                  return null;
+                                }
+                              },
                         style: TextStyle(color: Colors.white),
                         cursorColor: Colors.white,
                         decoration:  InputDecoration(
+                           errorStyle: GoogleFonts.aBeeZee(
+                                  fontSize: 15,
+                                  color: const Color.fromARGB(255, 247, 108, 98),
+                                ),
                           fillColor: CustomColors.background,
                           filled: true,
                           enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: siteParams.isEmpty&& siteParams.emailController.text.isEmpty? CustomColors.background : Colors.red)),
@@ -60,9 +71,21 @@ class Signup extends StatelessWidget
                     SizedBox(
                       width: 550,
                       child: TextFormField(
+                         validator: (value) {
+                                if (value?.isEmpty == true) {
+                                  siteParams.isEmpty = true;
+                                  return 'Email cannot be empty';
+                                }else {
+                                  return null;
+                                }
+                              },
                         style: TextStyle(color: Colors.white),
                         cursorColor: Colors.white,
                         decoration:  InputDecoration(
+                           errorStyle: GoogleFonts.aBeeZee(
+                                  fontSize: 15,
+                                  color: const Color.fromARGB(255, 247, 108, 98),
+                                ),
                           fillColor: CustomColors.background,
                           filled: true,
                           enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: siteParams.isEmpty&& siteParams.emailController.text.isEmpty? CustomColors.background : Colors.red)),
@@ -80,10 +103,24 @@ class Signup extends StatelessWidget
                       SizedBox(
                         width: 550,
                         child: TextFormField(
+                            validator: (value) {
+                                if (value?.isEmpty == true) {
+                                  siteParams.isEmpty = true;
+                                  return 'Password cannot be empty';
+                                }else if(siteParams.passwordController.text != siteParams.confirmPasswordController.text){
+                                  siteParams.isEmpty = true;
+                                  return 'Passwords is not the same';
+                                }
+                                return null;
+                              },
                           obscureText:siteParams.isPasswordHidden? true : false ,
                           style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration:  InputDecoration(
+                             errorStyle: GoogleFonts.aBeeZee(
+                                  fontSize: 15,
+                                  color: const Color.fromARGB(255, 247, 108, 98),
+                                ),
                             suffixIcon: MouseRegion(
                               cursor: SystemMouseCursors.click,
                               child: GestureDetector(
@@ -110,11 +147,24 @@ class Signup extends StatelessWidget
                       SizedBox(
                         width: 550,
                         child: TextFormField(
-                          
+                            validator: (value) {
+                                if (value?.isEmpty == true) {
+                                  siteParams.isEmpty = true;
+                                  return 'Password cannot be empty';
+                                }else if(siteParams.passwordController.text != siteParams.confirmPasswordController.text){
+                                  siteParams.isEmpty = true;
+                                  return 'Passwords is not the same';
+                                }
+                                return null;
+                              },
                           obscureText: siteParams.isConfirmPasswordHidden? true : false,
                           style: TextStyle(color: Colors.white),
                           cursorColor: Colors.white,
                           decoration:  InputDecoration(
+                             errorStyle: GoogleFonts.aBeeZee(
+                                  fontSize: 15,
+                                  color: const Color.fromARGB(255, 247, 108, 98),
+                                ),
                             suffixIcon: MouseRegion(
                               cursor: SystemMouseCursors.click,
                               child: GestureDetector(
@@ -152,10 +202,10 @@ class Signup extends StatelessWidget
                       cursor: SystemMouseCursors.click,
                       child: GestureDetector(
                         onTap: () async {
-                          bool isEqual = siteParams.passwordController.text == siteParams.confirmPasswordController.text;
-                          if(isEqual)
-                          {
+                          if (siteParams.key.currentState?.validate() == true) {
                             siteParams.checkUser(context);
+                            bool isEqual = siteParams.passwordController.text == siteParams.confirmPasswordController.text;
+                          if(isEqual){
                             if(await Server.signup(siteParams.emailController.text, siteParams.passwordController.text,siteParams.nameController.text)){
                               ScaffoldMessenger.of(context)
                                               .showSnackBar(
@@ -174,7 +224,13 @@ class Signup extends StatelessWidget
                                           );
                               Navigator.pushNamed(context, '/login');
                             }
+                          }else{
+                            siteParams.isLoading = false;
+                             
+                         }
+                        siteParams.checkUser(context);
                           }
+                          
                         },
                         child: Container(
                           width: 550,
