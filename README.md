@@ -37,7 +37,8 @@ This project was developed in **three key phases**:
 - **Phase 2: Frontend Development** (March 5, 2025 – March 8, 2025)  
   Built the **Flutter UI**, integrated **Cubit for state management**, and established communication with the backend.
 
-- **Phase 3: Testing & Optimization** (March 8, 2025 – March 9, 2025)  
+- **Phase 3: Testing & Optimization** (March 8, 2025 ![movie details](https://github.com/user-attachments/assets/730f68d7-f089-4259-b372-fe7edbf12f0f)![admin main page](https://github.com/user-attachments/assets/737e79c9-610a-494d-9c50-a67751c4c013)
+)  
   Conducted rigorous testing, fixed bugs, and optimized performance for a seamless user experience.
 
 ---
@@ -108,4 +109,13 @@ This project was developed as part of a **technical assessment for Fawry Company
 **Mazen Ahmed Abdelkhalik Mohamed**  
 📧 Email: [mazen20190441@gmail.com](mailto:mazen20190441@gmail.com)  
 🔗 LinkedIn: [Mazen Mansour](https://www.linkedin.com/in/mazen-mansour-b4726123a/)
+
+## Screen Shots
+![user searching](https://github.com/user-attachments/assets/a1d90c4c-58e3-4d14-b4b6-5d596655084d)
+![UserPage](https://github.com/user-attachments/assets/2a619163-82a8-4942-b569-ea858d594d1f)
+![signupPage Adding new user](https://github.com/user-attachments/assets/80af8cf4-882c-47ba-a39e-ac45ddcc45a9)
+![signupPage](https://github.com/user-attachments/assets/39e63df7-e1b6-4ea8-ae2a-ed6a68eda288)
+![loginPage](https://github.com/user-attachments/assets/3689089c-ddd0-48fd-9541-336d1c86a800)
+![admin Current Movies](https://github.com/user-attachments/assets/9a4cff54-7846-4e72-8842-660f537dcd69)
+![movie managment page](https://github.com/user-attachments/assets/77fa028a-f412-46c2-b7ed-6c4696607358)
 
