@@ -63,12 +63,12 @@ public class main_controller {
     @GetMapping("/home/movies")
     public List<movies_dto> viewAllMovies(@ModelAttribute("movie") movies_dto moviesDto , String query, Model model) throws ExecutionException, InterruptedException {
         model.addAttribute("message", "200");
-        return movieService.getAllMovies(query);
+        return movieService.getAllMovies();
     }
     @DeleteMapping("/admin/remove")
-    public boolean removeMovie(@ModelAttribute("movie") movies_dto moviesDto , String name, Model model) throws ExecutionException, InterruptedException {
+    public boolean removeMovie(@ModelAttribute("movie") movies_dto moviesDto , String name , String title, Model model) throws ExecutionException, InterruptedException {
         model.addAttribute("message", "200");
-        return movieService.removeMovie(name);
+        return movieService.removeMovie(name , title);
     }
     @PutMapping("/admin/add")
     public boolean addMovie(@ModelAttribute("movie") movies_dto moviesDto , String title , String type ,String movieName, String poster,String year,String imdbID, Model model)throws ExecutionException, InterruptedException {
