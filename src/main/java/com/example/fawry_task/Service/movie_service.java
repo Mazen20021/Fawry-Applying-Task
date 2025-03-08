@@ -23,33 +23,27 @@ public class movie_service implements movie_service_interface{
         this.restTemplate = restTemplate;
     }
     @Override
-    public List<movies_dto> searchMovies (String movieName) throws ExecutionException, InterruptedException {
-        List<movies_dto> allMovies = new ArrayList<>();
-        Firestore db = FirestoreClient.getFirestore();
-        DocumentSnapshot moviesDoc = db.collection(dbConstants.getMovieMainCollection()).document(movieName).get().get();
-        if (moviesDoc.exists()) {
-            Map<String, Object> moviesMap = moviesDoc.getData();
-            if (moviesMap != null) {
-                for (Map.Entry<String, Object> entry : moviesMap.entrySet()) {
-                    movies_dto movie = new movies_dto();
-                    Map<String, Object> movieData = (Map<String, Object>) entry.getValue();
-                    movie.setTitle((String) movieData.get("Title"));
-                    movie.setYear((String) movieData.get("Year"));
-                    movie.setType((String) movieData.get("Type"));
-                    movie.setImdbID((String) movieData.get("imdbID"));
-                    movie.setPoster((String) movieData.get("Poster"));
-                    allMovies.add(movie);
-                }
-            }
-            return allMovies;
-        }
+    public List<movies_dto> searchMovies(String movieName) {
         String url = omdbConstants.getUrl() + "?apikey=" + omdbConstants.getApiKey() + "&s=" + movieName;
         Map<String, Object> response = restTemplate.getForObject(url, Map.class);
+
+        List<movies_dto> allMovies = new ArrayList<>();
+
         if (response != null && response.containsKey("Search")) {
-            return (List<movies_dto>) response.get("Search");
+            List<Map<String, Object>> moviesList = (List<Map<String, Object>>) response.get("Search");
+            for (Map<String, Object> movieData : moviesList) {
+                movies_dto movie = new movies_dto();
+                movie.setTitle((String) movieData.get("Title"));
+                movie.setYear((String) movieData.get("Year"));
+                movie.setType((String) movieData.get("Type"));
+                movie.setImdbID((String) movieData.get("imdbID"));
+                movie.setPoster((String) movieData.get("Poster"));
+                allMovies.add(movie);
+            }
         }
-        return List.of();
+        return allMovies;
     }
+
     public List<movies_dto> getAllMovies() throws ExecutionException, InterruptedException {
         List<movies_dto> storedMovies = new ArrayList<>();
         Firestore db = FirestoreClient.getFirestore();
