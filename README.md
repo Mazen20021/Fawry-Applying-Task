@@ -103,8 +103,7 @@ This project was developed in **three key phases**:
 ---
 
 ## 🎯 Test The WebSite
-- ✅ Run the backend source code using intelji or open cmd and type java -jar project_location_Stored_in_your_pc/build/libs/Fawry_Task-0.0.1-SNAPSHOT.jar (make sure you are using java 23 you can download it from [Java23](https://www.oracle.com/java/technologies/downloads/#jdk23-windows))
-- ✅ Cmd command **java -jar build/libs/Fawry_Task-0.0.1-SNAPSHOT.jar**
+- ✅ Run the backend source code using intelji or open cmd and type **java -jar project_location_Stored_in_your_pc/build/libs/Fawry_Task-0.0.1-SNAPSHOT.jar** (make sure you are using java 23 you can download it from [Java23](https://www.oracle.com/java/technologies/downloads/#jdk23-windows))
 - ✅ after making sure that the backend launched and worked now you are ready to use the website you can try it by going to [FawryTask](https://mazen20021.github.io/FawryTaskRelease/#/login)
 - ✅ To Access Admin Page "Email = admin1@admin.com" , "Password" = "0000"
 - ✅ To Access User Page You Only Need to Signup New User and Login With it
