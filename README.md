@@ -48,7 +48,7 @@ This is the Requirements' Details:
 ## 🛠 Technology Stack
 
 ### 🔹 Frontend – Flutter
-- I chose Flutter for its rapid development capabilities, which aligned well with the project's time constraints. Given the limited time available, I was unable to study React in depth.
+- I chose Flutter for its rapid development capabilities, which aligned well with the project's time constraints. Given the limited time available, I was unable to study Angular in depth.
 - Built with **Flutter** for a modern, fast, and cross-platform user experience.
 - Utilizes **Cubit (Bloc Pattern)** for efficient state management.
 - Supports dynamic API calls to fetch and display movie data interactively.
