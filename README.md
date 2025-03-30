@@ -10,7 +10,7 @@ This application was developed as part of a **technical assessment for Fawry Com
 
 ## 🏆 About the Project
 This project was developed as part of a **technical assessment for Fawry Company**, showcasing expertise in:
-- **Flutter (Mobile Development)**
+- **Flutter (Web Development)**
 - **Spring Boot (Backend Development)**
 - **Firebase (Cloud Database Integration)**
   
